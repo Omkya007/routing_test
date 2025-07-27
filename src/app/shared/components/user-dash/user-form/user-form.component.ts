@@ -1,0 +1,90 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Iuser } from 'src/app/shared/models/user';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { UuidService } from 'src/app/shared/services/uuid.service';
+
+@Component({
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.css']
+})
+export class UserFormComponent implements OnInit {
+
+
+  isEdit:boolean=false
+  userId!:string
+  userForm!:FormGroup
+  editUser!:Iuser
+  constructor(
+    private _active:ActivatedRoute,
+    private _uuid:UuidService,
+    private _user:UsersService,
+    private _route:Router,
+    private _snack:SnackBarService
+  ) { }
+
+  ngOnInit(): void {
+    this.createUser()
+    this.getUserParams()
+    
+  }
+
+  createUser(){
+    this.userForm = new FormGroup({
+      username:new FormControl(null,[Validators.required]),
+      userrole:new FormControl(null,[Validators.required])
+    })
+  }
+
+
+  getUserParams(){
+     this.userId = this._active.snapshot.params['userId'];
+    console.log(this.userId);
+    if(this.userId){
+      this.isEdit=true
+      this._user.getUserDetails(this.userId)
+      .subscribe({
+        next:data=>{
+          this.editUser=data
+          console.log(this.editUser);
+          
+          this.userForm.patchValue(this.editUser)
+        },
+        error:err=> console.log(err),
+        
+      })
+    }
+  }
+
+  
+  onUserAdd() {
+    if(this.userForm.valid){
+      let obj:Iuser={...this.userForm.value, userid :this._uuid.generateUuid()}
+      console.log(obj);
+      this.userForm.reset();
+      this._user.addNew(obj)
+      this._snack.openSnackBar(`The user ${obj.username} added successfully`)
+      this._route.navigate(['users'])
+    }
+
+  
+
+   
+}
+
+  onUpdate(){
+    if(this.userForm.valid){
+      let update_user:Iuser={...this.userForm.value, userid:this.userId}
+      console.log(update_user);
+      this.userForm.reset();
+      this._user.updateUser(update_user);
+      this._snack.openSnackBar(`The user ${update_user.username} has been updated successfully`)
+      
+      this._route.navigate(['users'])
+    }
+  }
+
+}

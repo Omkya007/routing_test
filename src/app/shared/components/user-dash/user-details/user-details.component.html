@@ -1,0 +1,30 @@
+<app-back></app-back>
+<div class="card" *ngIf="userInfo && userId ; else noUser">
+  <div class="card-body">
+    <h4>
+      {{userInfo.username}}
+    </h4>
+    <p>
+      The userrole is {{userInfo.userrole}}
+    </p>
+    <div>
+      <button 
+      routerLink="edit"
+      class="btn btn-primary">
+        Edit
+      </button>
+      <button 
+      (click)="onRemove()"
+      class="btn btn-danger">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noUser>
+  <p class="alert alert-info">
+    No User Found
+  </p>
+</ng-template>
+

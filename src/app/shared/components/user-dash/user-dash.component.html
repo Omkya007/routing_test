@@ -1,0 +1,32 @@
+
+<div class="row">
+  <div class="col-12 text-right">
+    <button type="submit"
+   routerLink="addUser"
+    class="btn btn-primary">
+      Add User
+    </button>
+  </div>
+</div>
+
+<ul style="list-style-type: none; padding: 0;" *ngIf="userArr.length>0;else noUser">
+  <li 
+  [routerLink]="[user.userid]"
+  *ngFor="let user of userArr" style="margin-bottom: 16px;">
+    <mat-card >
+      <mat-card-header>
+        
+        <mat-card-title>{{ user.username }}</mat-card-title>
+       
+      </mat-card-header>
+      
+    </mat-card>
+  </li>
+</ul>
+
+<ng-template #noUser>
+  <p class="alert alert-info">
+    No user Found
+  </p>
+</ng-template>
+
