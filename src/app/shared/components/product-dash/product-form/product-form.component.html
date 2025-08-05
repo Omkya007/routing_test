@@ -1,0 +1,37 @@
+
+<h2>
+    {{isEdit?'Update Product':'Add Product'}}
+</h2>
+
+<form [formGroup]="prodForm" (ngSubmit)="onAdd()">
+  <mat-form-field>
+    <mat-label>Product Name</mat-label>
+    <input matInput formControlName="pname" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" >
+    <mat-label>Product Status</mat-label>
+    <mat-select formControlName="pstatus" >
+      <mat-option value="in progress">In-Progress</mat-option>
+      <mat-option value="dispatched">Dispatched</mat-option>
+      <mat-option value="delivered">Delivered</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" >
+    <mat-label>Product return</mat-label>
+    <mat-select formControlName="canreturn" required>
+      <mat-option [value]="0">No</mat-option>
+      <mat-option [value]="1">Yes</mat-option>
+      
+    </mat-select>
+  </mat-form-field>
+  <button
+  *ngIf="!isEdit"
+  type="submit" mat-raised-button color="primary">Add Product</button>
+  <button
+  [disabled]="updateBtn"
+  (click)="onUpdate()" 
+  *ngIf="isEdit"
+  type="button" mat-raised-button color="primary">Update Product</button>
+</form>
+

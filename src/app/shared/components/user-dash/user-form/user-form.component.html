@@ -24,6 +24,7 @@
      [disabled]="userForm.invalid"
      *ngIf="!isEdit"  mat-raised-button color="primary" type="submit" class="mr-2">Add </button>
     <button 
+   [disabled]="updateBtn"
     (click)="onUpdate()"
     *ngIf="isEdit"  mat-raised-button color="accent" type="button">Update</button>
 </form>

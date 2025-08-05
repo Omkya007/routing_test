@@ -9,9 +9,12 @@
   </div>
 </div>
 
-<ul style="list-style-type: none; padding: 0;" *ngIf="userArr.length>0;else noUser">
+<div class="row">
+  <div class="col-md-4">
+    <ul style="list-style-type: none; padding: 0;" *ngIf="userArr.length>0;else noUser">
   <li 
   [routerLink]="[user.userid]"
+  [queryParams]="{userRole:user.userrole}"
   *ngFor="let user of userArr" style="margin-bottom: 16px;">
     <mat-card >
       <mat-card-header>
@@ -24,9 +27,17 @@
   </li>
 </ul>
 
+  </div>
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
 <ng-template #noUser>
   <p class="alert alert-info">
     No user Found
   </p>
 </ng-template>
+
+
 

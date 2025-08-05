@@ -7,6 +7,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [
@@ -17,7 +19,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatListModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
+  ],
+
+  exports:[
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

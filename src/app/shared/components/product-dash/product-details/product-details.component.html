@@ -1,0 +1,20 @@
+<div class="mb-3">
+    <app-back></app-back>
+</div>
+<mat-card *ngIf="prodInfo" class="mb-3">
+  <mat-card-content>
+    <p>
+      The product name is <strong>{{ prodInfo.pname }}</strong> and its status is <strong>{{ prodInfo.pstatus }}</strong>
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions class="d-flex justify-content-between">
+    <button
+    (click)="onEditNavigate()"
+    mat-raised-button color="primary">Edit</button>
+    <button 
+    (click)="onRemove()"
+    mat-raised-button color="warn">Remove</button>
+  </mat-card-actions>
+</mat-card>
+

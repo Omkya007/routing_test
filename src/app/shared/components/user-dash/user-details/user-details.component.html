@@ -7,9 +7,10 @@
     <p>
       The userrole is {{userInfo.userrole}}
     </p>
-    <div>
+    <div class="d-flex justify-content-between">
       <button 
       routerLink="edit"
+      [queryParamsHandling]="'preserve'"
       class="btn btn-primary">
         Edit
       </button>

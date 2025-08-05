@@ -24,6 +24,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BackComponent } from './shared/components/back/back.component';
 import { GetConfirmComponent } from './shared/components/get-confirm/get-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './shared/components/product-dash/product-details/product-details.component';
+import { ProductFormComponent } from './shared/components/product-dash/product-form/product-form.component';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +42,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     UserDetailsComponent,
     UserFormComponent,
     BackComponent,
-    GetConfirmComponent
+    GetConfirmComponent,
+    ProductDetailsComponent,
+    ProductFormComponent,
+    PageNotFoundComponent
     
     
   ],
@@ -50,12 +59,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
-      MatCardModule,
+    MatCardModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
 ],
   providers: [],
   bootstrap: [AppComponent]

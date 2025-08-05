@@ -15,6 +15,7 @@ export class UserDetailsComponent implements OnInit {
 
  userId!:string
  userInfo!:Iuser;
+ 
   constructor(
     private _active:ActivatedRoute,
     private _user:UsersService,
@@ -25,17 +26,31 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.userId =this._active.snapshot.params['userId']
-    if(this.userId){
-      this._user.getUserDetails(this.userId)
-      .subscribe({
-        next:(data=>{
-          this.userInfo =data
-        }),error(err) {
-          return err
-        },
-      })
-    }
+    // this.userId =this._active.snapshot.params['userId']
+    // if(this.userId){
+    //   this._user.getUserDetails(this.userId)
+    //   .subscribe({
+    //     next:(data=>{
+    //       this.userInfo =data
+    //     }),error(err) {
+    //       return err
+    //     },
+    //   })
+    // }
+
+
+    this._active.params.subscribe(param=>{
+      this.userId =param['userId']
+      if(this.userId){
+        this._user.getUserDetails(this.userId).subscribe({
+          next:data=>{
+            this.userInfo=data
+          },error:err=>{
+            return err
+          }
+        })
+      }
+    })
   }
 
   onRemove() {
