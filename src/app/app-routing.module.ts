@@ -9,24 +9,36 @@ import { UserFormComponent } from './shared/components/user-dash/user-form/user-
 import { ProductFormComponent } from './shared/components/product-dash/product-form/product-form.component';
 import { ProductDetailsComponent } from './shared/components/product-dash/product-details/product-details.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { AuthGuard } from './shared/services/auth.guard';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import { FairDetailsComponent } from './shared/components/fairs-dash/fair-details/fair-details.component';
 
 // http://localhost:4200/#
 const routes:Routes=[
   {
     path:'',//http://localhost:4200/#
-    redirectTo:'home',
-    pathMatch:'full',
+    component:AuthComponent
     
   },
   {
     path:'home',//http://localhost:4200/#
     component:HomeComponent,
-    title:'DashBoard'
+    title:'DashBoard',
+     canActivate:[AuthGuard],
+     data:{
+      userRole:['buyer','admin','superAdmin']
+     }
   },{
     path:'users',//http://localhost:4200/users
     component:UserDashComponent,
     title:'User-DashBoard',
+    canActivate:[AuthGuard],
+    data:{
+      userRole:['admin','superAdmin']
+     },
+    canActivateChild:[AuthGuard],
     children:[
+    
        {
     path:'addUser',//http://localhost:4200/users
     component:UserFormComponent
@@ -48,6 +60,11 @@ const routes:Routes=[
     path:'products',//http://localhost:4200/products
     component:ProductDashComponent,
     title:'Product-DashBoard',
+     canActivate:[AuthGuard],
+     data:{
+      userRole:['buyer','admin','superAdmin']
+     },
+     canActivateChild:[AuthGuard],
     children: [
       {
         path: 'addProduct', //http://localhost:4200/users
@@ -69,11 +86,24 @@ const routes:Routes=[
   {
     path:'fairs',
     component:FairsDashComponent,
-    title:'Fair-DashBoard'
+    title:'Fair-DashBoard',
+    data:{
+      userRole:['superAdmin']
+     },
+    canActivate:[AuthGuard],
+    children:[
+      {
+        path:':fairId',
+        component:FairDetailsComponent
+      }
+    ]
   },
    {
     path:'page-not-found',//http://localhost:4200/#
-    component:PageNotFoundComponent
+    component:PageNotFoundComponent,
+    data:{
+      msg:"Page not Found"
+    }
   },{
     path:'**',
     redirectTo:'page-not-found'

@@ -12,7 +12,7 @@ export class SnackBarService {
 
   openSnackBar(msg:string){
     let matConfig:MatSnackBarConfig={
-      duration:300,
+      duration:3000,
       horizontalPosition:'left',
       verticalPosition:'top'
     }

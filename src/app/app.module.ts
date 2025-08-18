@@ -30,6 +30,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FairCardComponent } from './shared/components/fairs-dash/fair-card/fair-card.component';
+import { FairDetailsComponent } from './shared/components/fairs-dash/fair-details/fair-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +49,10 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     GetConfirmComponent,
     ProductDetailsComponent,
     ProductFormComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AuthComponent,
+    FairCardComponent,
+    FairDetailsComponent
     
     
   ],
@@ -66,7 +73,8 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
 ],
   providers: [],
   bootstrap: [AppComponent]

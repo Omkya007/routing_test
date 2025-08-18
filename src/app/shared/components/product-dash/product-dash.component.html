@@ -7,6 +7,7 @@
 </div>
 <div class="row">
   <div class="col-md-4" >
+     
     <!-- <mat-card 
      [queryParams]="{canEdit:prod.canreturn}"
     [routerLink]="[prod.pid]"
@@ -15,7 +16,7 @@
         {{ prod.pname }} 
       </mat-card-content>
     </mat-card> -->
-    <ul class="list-group">
+    <ul class="list-group" *ngIf="productArr.length>0;else noProd">
       <li class="list-group-item" *ngFor="let prod of productArr">
         <mat-card 
     (click)="onProd(prod)"
@@ -26,9 +27,14 @@
     </mat-card>
       </li>
     </ul>
+   
   </div>
   <div class="col-md-8">
     <router-outlet></router-outlet>
   </div>
 </div>
 
+
+<ng-template #noProd>
+  <p class="aler alert-info">No Prod</p>
+</ng-template>

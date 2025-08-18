@@ -1,0 +1,22 @@
+<div class="fair">
+    <div class="banner">
+        <img [src]="fairobj.bannerUrl" [alt]="fairobj.fairName">
+        <figcaption class="text-white font-weight-bold">
+            <h3 class="mb-2">
+                {{fairobj.fairName}}
+            </h3>
+            <p class="mb-1">
+                Event Type:{{fairobj.type}}
+            </p>
+            <p class="mb-1">
+                Regitration Deadline:{{((fairobj.startDate*1000)-86400000)|date}}
+            </p>
+        </figcaption>
+    </div>
+    <p [innerHTML]="fairobj.candidateDescription" class="mb-4">
+       
+    </p>
+    <p [innerHTML]="fairobj.schoolDescription" class="mb-4">
+      
+    </p>
+</div>

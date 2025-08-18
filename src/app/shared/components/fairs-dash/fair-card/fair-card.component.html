@@ -1,0 +1,21 @@
+
+<div class="card mt-4 fairCard" 
+[routerLink]="fairObj.fairId"
+[ngClass]="{
+    active:selectedFair===fairObj.fairId
+}"
+>
+    <div class="card-body">
+        <h4 class="text-uppercase">
+            {{fairObj.fairName}}
+        </h4>
+        <div class="typeAndDate mb-0">
+            <p>
+            Event Type:{{fairObj.type}}
+        </p>
+        <p>
+            Date:{{(fairObj.startDate*1000)|date}}
+        </p>
+        </div>
+    </div>
+</div>

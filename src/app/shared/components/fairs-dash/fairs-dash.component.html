@@ -1,1 +1,16 @@
-<p>fairs-dash works!</p>
+<h1 class="fairTitle p-3 mb-3">Fairs</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <app-fair-card
+        [selectedFair]="selectedId"
+        (click)="selectedId=fair.fairId"
+        [fairObj]='fair'
+        *ngFor="let fair of fairAr">
+
+        </app-fair-card>
+    </div>
+    <div class="col-md-8">
+      <router-outlet></router-outlet>
+    </div>
+</div>

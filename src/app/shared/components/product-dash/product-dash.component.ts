@@ -15,7 +15,8 @@ export class ProductDashComponent implements OnInit {
   constructor(
     private _product:ProductServiceService,
     private _snack:SnackBarService,
-    private _route:Router
+    private _route:Router,
+    private _active:ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +27,9 @@ export class ProductDashComponent implements OnInit {
     this._product.fetchAllProducts().subscribe({
       next:data=>{
         this.productArr=data
+        this._route.navigate([this.productArr[0].pid],{
+          relativeTo:this._active
+        })
         console.log((this.productArr));
         
       },

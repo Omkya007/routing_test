@@ -1,0 +1,94 @@
+
+<main class="main">
+    
+<ng-container *ngIf="alreadyhasAccount">
+   
+    <div class="card">
+        <div class="card-body">
+             <h2 >Login</h2>
+            <form [formGroup]="loginForm"
+            (ngSubmit)="onLogin()">
+         <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" >
+            <strong *ngIf="f['email'].touched && f['email'].hasError('required')" class="text-danger">
+                email is required field
+            </strong>
+            <strong *ngIf="f['email'].dirty && f['email'].hasError('pattern')" class="text-danger">
+                email is invalid
+            </strong>
+         </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control" >
+            <strong *ngIf="f['password'].touched && f['password'].hasError('required')" class="text-danger">
+                password is required field
+            </strong>
+            <strong *ngIf="f['password'].dirty && f['password'].hasError('pattern')" class="text-danger">
+                password is invalid
+            </strong>
+         </div>
+         <button type="submit" mat-raised-button color="primary">
+            Login
+         </button>
+    </form>
+    <a href="javacript:;" (click)="alreadyhasAccount=!alreadyhasAccount">
+        Don't have account 
+    </a>
+        </div>
+    </div>
+
+
+</ng-container>
+
+
+
+
+<ng-container *ngIf="!alreadyhasAccount">
+    
+    <div class="card">
+        <div class="card-body">
+           <h2>Sign Up</h2>
+            <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+                 <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" formControlName="email">
+                 <strong *ngIf="s['email'].touched && s['email'].hasError('required')" class="text-danger">
+                email is required field
+            </strong>
+            <strong *ngIf="s['email'].dirty && s['email'].hasError('pattern')" class="text-danger">
+                email is invalid
+            </strong>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName="password">
+                <strong *ngIf="s['password'].touched && s['password'].hasError('required')" class="text-danger">
+                password is required field
+            </strong>
+            <strong *ngIf="s['password'].dirty && s['password'].hasError('pattern')" class="text-danger">
+                password is invalid
+            </strong>
+            </div>
+            <div class="form-group">
+                <label for="userRole">userRole</label>
+                <select class="form-control" formControlName="userRole" id="userRole">
+                    <option value="buyer">Buyer</option>
+                    <option value="admin">Admin</option>
+                    <option value="superAdmin">Super Admin</option>
+                </select>
+            </div>
+            <button type="submit" mat-raised-button color="primary">
+            Sign Up
+         </button>
+            </form>
+             <a href="javacript:;" (click)="alreadyhasAccount=!alreadyhasAccount">
+       Already have account then login
+    </a>
+        </div>
+    </div>
+   
+
+</ng-container>
+
+</main>
