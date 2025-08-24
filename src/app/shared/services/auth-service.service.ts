@@ -37,6 +37,10 @@ export class AuthServiceService {
     localStorage.setItem('userRole',userRole)
   }
 
+  getUserRole(){
+    return localStorage.getItem('userRole')
+  }
+
   getToken():boolean{
     return !!localStorage.getItem('token')
   }

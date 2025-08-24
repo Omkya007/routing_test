@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IcanDeactivate } from 'src/app/shared/models/candeactivate';
 import { Iuser } from 'src/app/shared/models/user';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { UsersService } from 'src/app/shared/services/users.service';
@@ -11,7 +13,7 @@ import { UuidService } from 'src/app/shared/services/uuid.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit ,IcanDeactivate{
 
 
   isEdit:boolean=false
@@ -92,7 +94,24 @@ export class UserFormComponent implements OnInit {
       this._snack.openSnackBar(`The user ${update_user.username} has been updated successfully`)
       
       this._route.navigate(['users'])
+      this.isEdit=false
     }
+
+  
   }
 
+  canDeactivate(){
+    //if form is edited and not submitted
+    //return false
+
+
+    //if form is dirty but updated
+    //return true
+    if(this.userForm.dirty && this.isEdit){
+      let getConfirm=confirm(`Are you sure you want to discard the changes`)
+      return getConfirm
+  }
+  return true
+
+}
 }

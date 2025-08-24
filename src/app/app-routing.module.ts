@@ -12,6 +12,8 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { AuthGuard } from './shared/services/auth.guard';
 import { AuthComponent } from './shared/components/auth/auth.component';
 import { FairDetailsComponent } from './shared/components/fairs-dash/fair-details/fair-details.component';
+import { UserRoleGuard } from './shared/services/user-role.guard';
+import { CanDeactivateGuard } from './shared/services/can-deactivate.guard';
 
 // http://localhost:4200/#
 const routes:Routes=[
@@ -32,7 +34,7 @@ const routes:Routes=[
     path:'users',//http://localhost:4200/users
     component:UserDashComponent,
     title:'User-DashBoard',
-    canActivate:[AuthGuard],
+    canActivate:[AuthGuard,UserRoleGuard],
     data:{
       userRole:['admin','superAdmin']
      },
@@ -51,7 +53,9 @@ const routes:Routes=[
    
    {
     path:':userId/edit',//http://localhost:4200/users
-    component:UserFormComponent
+    component:UserFormComponent,
+    canDeactivate:[CanDeactivateGuard]
+
   },
     ]
   },
@@ -60,11 +64,11 @@ const routes:Routes=[
     path:'products',//http://localhost:4200/products
     component:ProductDashComponent,
     title:'Product-DashBoard',
-     canActivate:[AuthGuard],
+     canActivate:[AuthGuard,UserRoleGuard],
      data:{
       userRole:['buyer','admin','superAdmin']
      },
-     canActivateChild:[AuthGuard],
+    //  canActivateChild:[AuthGuard],
     children: [
       {
         path: 'addProduct', //http://localhost:4200/users
@@ -90,7 +94,7 @@ const routes:Routes=[
     data:{
       userRole:['superAdmin']
      },
-    canActivate:[AuthGuard],
+    canActivate:[AuthGuard,UserRoleGuard],
     children:[
       {
         path:':fairId',
