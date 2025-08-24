@@ -20,11 +20,17 @@ export class ProductDetailsComponent implements OnInit {
     private _active:ActivatedRoute,
     private _route:Router,
     private _matdialog:MatDialog
-  ) { }
+  ) { 
+    console.log(this._active);
+    
+    this._active.data.subscribe(res=>{
+      this.prodInfo=res['productObj']
+    })
+  }
 
   ngOnInit(): void {
     // this.singleProd()
-    this.single()
+    // this.single()
   }
 
   // singleProd(){

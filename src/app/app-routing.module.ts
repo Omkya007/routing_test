@@ -15,6 +15,8 @@ import { FairDetailsComponent } from './shared/components/fairs-dash/fair-detail
 import { UserRoleGuard } from './shared/services/user-role.guard';
 import { CanDeactivateGuard } from './shared/services/can-deactivate.guard';
 import { ProductResolver } from './shared/services/product.reslover';
+import { SingleProductResolver } from './shared/services/single-product.resolver';
+import { NewProdResolver } from './shared/services/new-prod.resolver';
 
 // http://localhost:4200/#
 const routes:Routes=[
@@ -70,7 +72,8 @@ const routes:Routes=[
       userRole:['buyer','admin','superAdmin']
      },
      resolve:{
-      products:ProductResolver
+      productObj:NewProdResolver
+      // products:ProductResolver
      },
     //  canActivateChild:[AuthGuard],
     children: [
@@ -80,7 +83,11 @@ const routes:Routes=[
       },
       {
         path: ':pid', //http://localhost:4200/users
-        component: ProductDetailsComponent
+        component: ProductDetailsComponent,
+        resolve:{
+          productObj:NewProdResolver
+          // productObj:SingleProductResolver
+        }
       },
 
 

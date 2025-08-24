@@ -22,7 +22,9 @@ export class UserDetailsComponent implements OnInit {
     private _route:Router,
     private _snack:SnackBarService,
     private _matdialog:MatDialog
-  ) { }
+  ) {
+
+   }
 
   ngOnInit(): void {
    

@@ -19,7 +19,7 @@ export class ProductDashComponent implements OnInit {
     private _active:ActivatedRoute
   ) {
      console.log(this._active);
-     this.productArr=this._active.snapshot.data['products']
+     this.productArr=this._active.snapshot.data['productObj']
    }
 
   ngOnInit(): void {
