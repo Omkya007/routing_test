@@ -17,10 +17,16 @@ export class ProductDashComponent implements OnInit {
     private _snack:SnackBarService,
     private _route:Router,
     private _active:ActivatedRoute
-  ) { }
+  ) {
+     console.log(this._active);
+     this.productArr=this._active.snapshot.data['products']
+   }
 
   ngOnInit(): void {
-    this.getproductall()
+    // this.getproductall()
+
+   
+    
   }
 
   getproductall(){

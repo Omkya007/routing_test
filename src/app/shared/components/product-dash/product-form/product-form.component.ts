@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, CanDeactivate, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IcanDeactivate } from 'src/app/shared/models/candeactivate';
 import { Iproduct } from 'src/app/shared/models/product';
 import { ProductServiceService } from 'src/app/shared/services/product-service.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -11,7 +13,7 @@ import { UuidService } from 'src/app/shared/services/uuid.service';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit ,IcanDeactivate{
 
  isEdit:boolean=false
  prodForm!:FormGroup
@@ -100,13 +102,23 @@ export class ProductFormComponent implements OnInit {
       })
       this.prodForm.reset()
       this._route.navigate(['products'])
+      this.isEdit=false
       this._snack.openSnackBar(`This product ${updated.pname} is updated  successfully`)
     }
+  }
+
+  canDeactivate(){
+  
+
+    if(this.prodForm.dirty && this.isEdit){
+      let getConfirm=confirm(`Are you sure you want to discard the changes ?`)
+      return getConfirm
+    }
+
+  return true
   }
   
 
 }
-function params(value: Params): void {
-  throw new Error('Function not implemented.');
-}
+
 
